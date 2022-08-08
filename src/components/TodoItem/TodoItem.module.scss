@@ -1,0 +1,9 @@
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 1px 0 5px gray;
+  padding: 5px;
+  border-radius: 2px;
+  cursor: pointer;
+}
