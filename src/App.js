@@ -1,24 +1,55 @@
 import AppModule from './App.module.scss'
 import TodoForm from "./components/TodoForm/TodoForm";
-import React from "react";
 
-const App = () => {
-    const STORE = [
-        {title: 'title', done: false},
-        {title: 'title2', done: false},
-        {title: 'title3', done: false},
-        {title: 'title4', done: false},
-        {title: 'title5', done: false,}
-    ]
-    const [state, setState] = React.useState(STORE);
+import React, {Component} from "react";
 
-    return (
-        <div className={AppModule.wrapper}>
-            <TodoForm data={state}
-                      stateChanger={(st) => setState([st, ...state])}
-            />
-        </div>
-    );
+class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            items: [],
+            done: false
+        }
+    }
+
+    AddItem(id, title, baseState = this.state.done) {
+        const {items} = this.state;
+        this.setState({
+            items: [...items, {id, title, baseState}],
+        })
+    }
+
+    DeleteItem(id) {
+        const {items} = this.state
+        const result = items.filter(item => item.id !== id)
+        this.setState({
+            items: result
+        })
+    }
+
+    setChecked(id) {
+        const {items} = this.state;
+        items.filter((item) => {
+            if (item.id === id) {
+                item.done = true;
+                this.setState({done: true})
+            }
+        })
+    }
+
+
+    render() {
+        return (
+            <div className={AppModule.wrapper}>
+                <TodoForm
+                    setChecked={this.setChecked.bind(this)}
+                    DeleteItem={this.DeleteItem.bind(this)}
+                    items={this.state.items}
+                    addItem={this.AddItem.bind(this)
+                    }/>
+            </div>
+        )
+    }
 }
 
 export default App;

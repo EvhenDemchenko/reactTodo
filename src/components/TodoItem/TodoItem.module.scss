@@ -6,4 +6,15 @@
   padding: 5px;
   border-radius: 2px;
   cursor: pointer;
+  .btn {
+    background-color: #f9f9f9;
+    border: 1px solid whitesmoke;
+    border-radius: 3px;
+    padding: 2px 4px;
+    transition: background-color 0.5s;
+    &:hover {
+      background-color: #cfcfcf;
+
+    }
+  }
 }

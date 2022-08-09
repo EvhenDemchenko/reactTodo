@@ -1,22 +1,26 @@
-import React from 'react';
 import itemsCss from './TodoItems.module.scss'
 import TodoItem from "../TodoItem/TodoItem";
+import React, {Component} from 'react';
 
-const TodoItems = ({items}) => {
+class TodoItems extends Component {
+    constructor(props) {
+        super(props);
 
-
-    return (
-
-        <div className={itemsCss.items}>
-            {items.map((item,index) => {
-                    return (<TodoItem
-                        key={index}
-                        item={item}/>)
-                }
-            )}
-
-        </div>
-    );
-};
+    }
+    render() {
+        return (
+            <div className={itemsCss.items}>
+                {this.props.items.map((item) => {
+                        return (<TodoItem
+                            setChecked={this.props.setChecked}
+                            DeleteItem={this.props.DeleteItem}
+                            key={item.id}
+                            item={item}/>)
+                    }
+                )}
+            </div>
+        );
+    }
+}
 
 export default TodoItems;

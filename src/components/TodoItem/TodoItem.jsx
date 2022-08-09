@@ -1,32 +1,42 @@
-import React from 'react';
 import itemCss from './TodoItem.module.scss'
-
 import correct from '../../assets/correct.png'
 import incorrect from '../../assets/discorrect.png'
 
+import React, {Component} from 'react';
 
-const TodoItem = ({item}) => {
-    const [done, setDone] = React.useState(item.done);
-    const stateChanger = () => {
-        setDone(!done);
-        item.done = !done;
+class TodoItem extends Component {
+    constructor(props) {
+        super(props);
     }
-    return (
-        <>
-        {done === true ?
-            <div onClick={stateChanger}
-                 className={itemCss.item}>
-                <b> <s> {item.title} </s></b>
-                <img width={30} height={30} src={correct} alt="correct"/>
-            </div> :
-            <div onClick={stateChanger}
-                 className={itemCss.item}>
-                <b>{item.title}</b>
-                <img width={30} height={30} src={incorrect} alt="incorrect"/>
-            </div>
-        }
-        </>
-)
-};
+
+    deleteHandle(){
+        const {DeleteItem} = this.props;
+        DeleteItem(this.props.item.id);
+    }
+    setDoneItem () {
+        const {setChecked} = this.props;
+        setChecked(this.props.item.id)
+    }
+    render() {
+        return (
+            <>
+                <div
+                    className={itemCss.item}>
+                    <b>{this.props.item.title}</b>
+                    <div className='d-flex align-center'>
+                        <button
+                            className={itemCss.btn}
+                            onClick={this.deleteHandle.bind(this)}
+                        > delete </button>
+                        {this.props.item.done
+                            ?<img onClick={this.setDoneItem.bind(this)} className='ml-10' width={30} height={30} src={correct} alt="correct"/>
+                            :<img onClick={this.setDoneItem.bind(this)} className='ml-10' width={30} height={30} src={incorrect} alt="incorrect"/>
+                        }</div>
+
+                </div>
+            </>
+        )
+    }
+}
 
 export default TodoItem;
