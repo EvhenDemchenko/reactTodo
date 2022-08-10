@@ -1,19 +1,19 @@
+import React, {Component} from 'react';
 import itemsCss from './TodoItems.module.scss'
 import TodoItem from "../TodoItem/TodoItem";
-import React, {Component} from 'react';
+
 
 class TodoItems extends Component {
-    constructor(props) {
-        super(props);
-
-    }
     render() {
+        const {setChecked} = this.props;
+        const {DeleteItem} = this.props;
+        const {items} = this.props;
         return (
             <div className={itemsCss.items}>
-                {this.props.items.map((item) => {
+                {items.map((item) => {
                         return (<TodoItem
-                            setChecked={this.props.setChecked}
-                            DeleteItem={this.props.DeleteItem}
+                            setChecked={setChecked}
+                            DeleteItem={DeleteItem}
                             key={item.id}
                             item={item}/>)
                     }
