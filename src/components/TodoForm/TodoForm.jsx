@@ -28,10 +28,7 @@ class TodoForm extends Component {
     }
 
     render() {
-        const {setChecked} = this.props;
-        const {DeleteItem} = this.props;
-        const {items} = this.props;
-        const {inputValue} = this.state;
+        const {setChecked, DeleteItem, items, inputValue} = this.props;
 
         return (<>
             <form action="#" onSubmit={this.PreventFormAction.bind(this)}

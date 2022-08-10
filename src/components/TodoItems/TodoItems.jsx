@@ -5,9 +5,7 @@ import TodoItem from "../TodoItem/TodoItem";
 
 class TodoItems extends Component {
     render() {
-        const {setChecked} = this.props;
-        const {DeleteItem} = this.props;
-        const {items} = this.props;
+        const {setChecked, DeleteItem, items} = this.props;
         return (
             <div className={itemsCss.items}>
                 {items.map((item) => {
